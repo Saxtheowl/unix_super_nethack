@@ -1,0 +1,26 @@
+X change default pet with a special new one
+- add mass strings from a file in the game
+- add own dialog with specific monster
+X allow special pet to level up
+- add new wand item that can create specific mons
+X change specific strings in the game without breaking it
+X swap tileset (default) between monsters
+X fix conflict between official package and mine on the same device
+X permit more than 1 pet at begining
+- only seeing one type of monster when hallu
+- allow interaction between the new pet and the player when certain even occur (eg remove cap " oh u remove ur cap ")
+- create 10 new (unique?) monsters
+
+- create an item once activated indicate where the pet is ( which level ? )
+- create new level
+- create whole new merchant
+- new pets event when polymorphed
+- new wand type that polymorph with special rules
+- dynamic advice ?
+- special text with info when pets die
+- link special pet with god, if player pray pet too, or if god == happy, pet == unhappy
+- fix long worm replaced string
+- add more interaction when #chat with dog and cat, like random miaou woof woof (lul)
+- random blabla between monster, guards ?
+- add support for other language in the game, or direct translation ? (woot!)
+- try a monster that really have his own initiative in the game ? like an AI that move and learn independently in paralel with the player

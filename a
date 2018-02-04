@@ -1,0 +1,279 @@
+        {"myself", S_HUMAN, 1, 10, 10, 0, 0, G_GENO | G_NOGEN,
+	        { { AT_WEAP, AD_PHYS, 1, 6 }, NO_ATTK, NO_ATTK,
+		          NO_ATTK, NO_ATTK, NO_ATTK },
+			          WT_HUMAN, 400, PL_NSIZ, MS_HUMANOID, MZ_HUMAN, 0, 0,
+				          M1_NEEDPICK | M1_HUMANOID | M1_OMNIVORE,
+					          M2_HUMAN | M2_STRONG | M2_COLLECT, 0, C(HI_DOMESTIC)}
+
+   -name: ("myself") is the name for the monster.
+
+   -symbol: (S_HUMAN) is the letter used for it. The complete list is defined
+   	      in the file monsym.h
+
+   -level: (1). The monster is initially created with this level.
+
+   -move rate: (10). Ranges from 0 -don't move- to 30 -really fast-.
+
+   -AC: (10). Come on! you now quite well what this is.
+
+   -magic resistance: (0). Ranges from 0 -none- to 127 -full-.
+
+   -alignment: (0). negative value means chaotic, positive lawful.
+
+   -creation/geno flags: (G_GENO | G_NOGEN)
+   		  these are flags or'ded, with this meaning:
+
+        G_UNIQ          /* generated only once */
+	        G_NOHELL        /* not generated in "hell" */
+		        G_HELL          /* generated only in "hell" */
+			        G_NOGEN         /* generated only specially */
+				        G_NOCORPSE      /* no corpse left ever */
+					        G_SGROUP        /* appear in small groups normally */
+						        G_LGROUP        /* appear in large groups normally */
+							        G_GENO          /* can be genocided */
+								        G_GENOD         /* have been genocided */
+									        G_EXTINCT       /* have been extinguished as
+										                           population control */
+													           G_FREQ          /* creation frequency mask */
+
+                 (from monsym.h)
+
+   -attack: ({ { AT_WEAP, AD_PHYS, 1, 6 }, NO_ATTK, NO_ATTK,
+              NO_ATTK, NO_ATTK, NO_ATTK },)
+	            This defines how the monster attacks. This element is composed of six
+		          'attack' struct, each one being the form:
+
+			    ( attack_type, damage_type, # of dice, # of sides of each )
+
+      where attack_type is one of:
+
+        AT_NONE         /* passive monster (ex. acid blob) */
+	        AT_CLAW         /* claw (punch, hit, etc.) */
+		        AT_BITE         /* bite */
+			        AT_KICK         /* kick */
+				        AT_BUTT         /* head butt (ex. a unicorn) */
+					        AT_TUCH         /* touches */
+						        AT_STNG         /* sting */
+							        AT_HUGS         /* crushing bearhug */
+								        AT_SPIT         /* spits substance - ranged */
+									        AT_ENGL         /* engulf (swallow or by a butt) */
+										        AT_BREA         /* breath - ranged */
+											        AT_EXPL         /* explodes - proximity */
+												        AT_GAZE         /* gaze - ranged */
+													        AT_TENT         /* tentacles */
+														        AT_WEAP         /* uses weapon */
+															        AT_MAGC         /* uses magic spell(s) */
+
+      damage_type is one of:
+
+        AD_PHYS         /* ordinary physical */
+	        AD_MAGM         /* magic missiles */
+		        AD_FIRE         /* fire damage */
+			        AD_COLD         /* frost damage */
+				        AD_SLEE         /* sleep ray */
+					        AD_DISN         /* disintegration (death ray) */
+						        AD_ELEC         /* shock damage */
+							        AD_DRST         /* drains str (poison) */
+								        AD_ACID         /* acid damage */
+									        AD_SPC1         /* for extension of buzz() */
+										        AD_SPC2         /* for extension of buzz() */
+											        AD_BLND         /* blinds (glowing eye) */
+												        AD_STUN         /* stuns */
+													        AD_SLOW         /* slows */
+														        AD_PLYS         /* paralyses */
+															        AD_DRLI         /* drains life levels (Vampire) */
+																        AD_DREN         /* drains magic energy */
+																	        AD_LEGS         /* damages legs (xan) */
+																		        AD_STON         /* petrifies (Medusa, Cockatrice) */
+																			        AD_STCK         /* sticks to you (Mimic) */
+																				        AD_SGLD         /* steals gold (Leppie) */
+																					        AD_SITM         /* steals item (Nymphs) */
+																						        AD_SEDU         /* seduces & steals multiple items */
+																							        AD_TLPT         /* teleports you (Quantum Mech.) */
+																								        AD_RUST         /* rusts armour (Rust Monster)*/
+																									        AD_CONF         /* confuses (Umber Hulk) */
+																										        AD_DGST         /* digests opponent (trapper, etc.) */
+																											        AD_HEAL         /* heals opponent's wounds (nurse) */
+																												        AD_WRAP         /* special "stick" for eels */
+																													        AD_WERE         /* confers lycanthropy */
+																														        AD_DRDX         /* drains dexterity (Quasit) */
+																															        AD_DRCO         /* drains constitution */
+																																        AD_DRIN         /* drains intelligence (mind flayer) */
+																																	        AD_DISE         /* confers diseases */
+																																		        AD_DCAY         /* decays organics (Brown pudding) */
+																																			        AD_SSEX         /* Succubus seduction (extended) */
+																																				        AD_DETH         /* for Death only */
+																																					        AD_PEST         /* for Pestilence only */
+																																						        AD_FAMN         /* for Famine only */
+																																							        AD_CLRC         /* random clerical spell */
+																																								        AD_SPEL         /* random magic spell */
+																																									        AD_RBRE         /* random breath weapon */
+																																										        AD_SAMU         /* hits, may steal Amulet (Wizard) */
+																																											        AD_CURS         /* random curse (ex. gremlin) */
+
+      and the # dice/faces sets a range of damage:
+
+           i.e:   1,6     means a possible damage between 1 and 6,
+	                 but 3,7     means a possible damage between 3 and 21.
+
+      So, a monster can attack six times per turn at maximum. To attack less
+            times use the 'NO_ATTACK' entry.
+
+   -weight: (WT_HUMAN). Can be one of several defines like WT_DRAGON, WT_HUMAN,
+         WT_ELF, but also a direct number can be used.
+
+   -nutritional value: (400). The title says it all.
+
+   -extension length: (PL_NSIZ). Here comes a problem...This is the size of an
+         extra struct added to the normal permonst if the monster has any. For
+	       example, shopkeepers have an extra struct used to manage the shop
+	             code, dogs an extra to manage taming levels, etc... For the moment
+		           forget about this part.
+
+   -sounds made: (MS_HUMAN). It is one of: (from monflag.h)
+
+        MS_SILENT       /* makes no sound */
+	        MS_BARK         /* if full moon, may howl */
+		        MS_MEW          /* mews or hisses */
+			        MS_ROAR         /* roars */
+				        MS_GROWL        /* growls */
+					        MS_SQEEK        /* squeaks, as a rodent */
+						        MS_SQAWK        /* squawks, as a bird */
+							        MS_HISS         /* hisses */
+								        MS_BUZZ         /* buzzes (killer bee) */
+									        MS_GRUNT        /* grunts (or speaks own language) */
+										        MS_NEIGH        /* neighs, as an equine */
+											        MS_WAIL         /* wails, as a tortured soul */
+												        MS_GURGLE       /* gurgles, as liquid or through saliva */
+													        MS_BURBLE       /* burbles (jabberwock) */
+														        MS_ANIMAL       /* up to here are animal noises */
+															        MS_SHRIEK       /* wakes up others */
+																        MS_BONES        /* rattles bones (skeleton) */
+																	        MS_LAUGH        /* grins, smiles, giggles, and laughs */
+																		        MS_MUMBLE       /* says something or other */
+																			        MS_IMITATE      /* imitates others (leocrotta) */
+																				        MS_ORC          /* intelligent brutes */
+																					        MS_HUMANOID     /* generic traveling companion */
+																						        MS_ARREST       /* "Stop in the name of the law!" (Kops) */
+																							        MS_SOLDIER      /* army and watchmen expressions */
+																								        MS_GUARD        /* "Please drop that gold and follow me." */
+																									        MS_DJINNI       /* "Thank you for freeing me!" */
+																										        MS_NURSE        /* "Take off your shirt, please." */
+																											        MS_SEDUCE       /* "Hello, sailor." (Nymphs) */
+																												        MS_VAMPIRE      /* vampiric seduction, Vlad's exclamations */
+																													        MS_BRIBE        /* asks for money, or berates you */
+																														        MS_CUSS         /* berates (demons) or intimidates (Wiz) */
+																															        MS_RIDER        /* astral level special monsters */
+																																        MS_LEADER       /* your class leader */
+																																	        MS_NEMESIS      /* your nemesis */
+																																		        MS_GUARDIAN     /* your leader's guards */
+																																			        MS_SELL         /* demand payment, complain about shoplifters */
+																																				        MS_ORACLE       /* do a consultation */
+																																					        MS_PRIEST       /* ask for contribution; do cleansing */
+
+
+   -physical size: (MZ_HUMAN). Is one of:
+
+        MZ_TINY         0               /* < 2' */
+	        MZ_SMALL        1               /* 2-4' */
+		        MZ_MEDIUM       2               /* 4-7' */
+			        MZ_HUMAN        MZ_MEDIUM       /* human-sized */
+				        MZ_LARGE        3               /* 7-12' */
+					        MZ_HUGE         4               /* 12-25' */
+						        MZ_GIGANTIC     7               /* off the scale */
+
+   -resistance conferred (randomly) when eaten: (0)
+
+        MR_FIRE         /* resists fire */
+	        MR_COLD         /* resists cold */
+		        MR_SLEEP        /* resists sleep */
+			        MR_DISINT       /* resists disintegration */
+				        MR_ELEC         /* resists atomicity */
+					        MR_POISON       /* resists poison */
+						        MR_ACID         /* resists acid */
+							        MR_STONE        /* resists petrification */
+
+   -First group of flags: (specify the monster behaviour)
+             (M1_NEEDPICK | M1_HUMANOID | M1_OMNIVORE)
+
+        M1_FLY          /* can fly or float */
+	        M1_SWIM         /* can traverse water */
+		        M1_AMORPHOUS    /* can flow under doors */
+			        M1_WALLWALK     /* can phase thru rock */
+				        M1_CLING        /* can cling to ceiling */
+					        M1_TUNNEL       /* can tunnel thru rock */
+						        M1_NEEDPICK     /* needs pick to tunnel */
+							        M1_CONCEAL      /* hides under objects */
+								        M1_HIDE         /* mimics, blends in with ceiling */
+									        M1_AMPHIBIOUS   /* can survive underwater */
+										        M1_BREATHLESS   /* doesn't need to breathe */
+											        M1_NOEYES       /* no eyes to gaze into or blind */
+												        M1_NOHANDS      /* no hands to handle things */
+													        M1_NOLIMBS      /* no arms/legs to kick/wear on */
+														        M1_NOHEAD       /* no head to behead */
+															        M1_MINDLESS     /* has no mind--golem, zombie, mold */
+																        M1_HUMANOID     /* has humanoid head/arms/torso */
+																	        M1_ANIMAL       /* has animal body */
+																		        M1_SLITHY       /* has serpent body */
+																			        M1_UNSOLID      /* has no solid or liquid body */
+																				        M1_THICK_HIDE   /* has thick hide or scales */
+																					        M1_OVIPAROUS    /* can lay eggs */
+																						        M1_REGEN        /* regenerates hit points */
+																							        M1_SEE_INVIS    /* can see invisible creatures */
+																								        M1_TPORT        /* can teleport */
+																									        M1_TPORT_CNTRL  /* controls where it teleports to */
+																										        M1_ACID         /* acidic to eat */
+																											        M1_POIS         /* poisonous to eat */
+																												        M1_CARNIVORE    /* eats corpses */
+																													        M1_HERBIVORE    /* eats fruits */
+																														        M1_OMNIVORE     /* eats both */
+																															        M1_METALLIVORE  /* eats metal */
+
+
+   -Second group of flags: (specify more monster behaviour)
+           (M2_HUMAN | M2_STRONG | M2_COLLECT)
+
+        M2_NOPOLY       /* players mayn't poly into one */
+	        M2_UNDEAD       /* is walking dead */
+		        M2_WERE         /* is a lycanthrope */
+			        M2_ELF          /* is an elf */
+				        M2_DWARF        /* is a dwarf */
+					        M2_GIANT        /* is a giant */
+						        M2_ORC          /* is an orc */
+							        M2_HUMAN        /* is a human */
+								        M2_DEMON        /* is a demon */
+									        M2_MERC         /* is a guard or soldier */
+										        M2_LORD         /* is a lord to its kind */
+											        M2_PRINCE       /* is an overlord to its kind */
+												        M2_MINION       /* is a minion of a deity */
+													        M2_MALE         /* always male */
+														        M2_FEMALE       /* always female */
+															        M2_NEUTER       /* neither male nor female */
+																        M2_PNAME        /* monster name is a proper name */
+																	        M2_HOSTILE      /* always starts hostile */
+																		        M2_PEACEFUL     /* always starts peaceful */
+																			        M2_DOMESTIC     /* can be tamed by feeding */
+																				        M2_WANDER       /* wanders randomly */
+																					        M2_STALK        /* follows you to other levels */
+																						        M2_NASTY        /* extra-nasty monster (more xp) */
+																							        M2_STRONG       /* strong (or big) monster */
+																								        M2_ROCKTHROW    /* throws boulders */
+																									        M2_GREEDY       /* likes gold */
+																										        M2_JEWELS       /* likes gems */
+																											        M2_COLLECT      /* picks up weapons and food */
+																												        M2_MAGIC        /* picks up magic items */
+
+   -Third group of flags: (0) (specify even more monster behaviour)
+
+        M3_WANTSAMUL    /* would like to steal the amulet */
+	        M3_WANTSBELL    /* wants the bell */
+		        M3_WANTSBOOK    /* wants the book */
+			        M3_WANTSCAND    /* wants the candelabrum */
+				        M3_WANTSARTI    /* wants the quest artifact */
+					        M3_WANTSALL     /* wants any major artifact */
+						        M3_WANTSALL     /* wants any major artifact */
+							        M3_WAITFORU     /* waits to see you or get attacked */
+								        M3_CLOSE        /* lets you close unless attacked */
+									        M3_COVETOUS     /* wants something */
+										        M3_WAITMASK     /* waiting... */
+											
